@@ -1,4 +1,4 @@
-const guess = (word, answer) => {   // String, String -> Array[String]
+export const guess = (word, answer) => {   // String, String -> Array[String]
   let answer_char_count = {}
   for (let i = 0; i < answer.length; i++) {
     if (answer[i] in answer_char_count) {
@@ -34,5 +34,3 @@ const guess = (word, answer) => {   // String, String -> Array[String]
 
   return res
 }
-
-export default guess
