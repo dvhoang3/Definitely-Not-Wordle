@@ -3,6 +3,8 @@ import './App.css';
 
 import { guess } from "./logic/guess"
 
+// STATE -> UPDATE STATE W/ USE EFFECT FOR SINGLE LETTER -> USE EFFECT DEPENDENT ON STATE
+
 function App() {
   let answer = "IDIOT"                          // TEMPORARY ANSWER
 
@@ -13,9 +15,9 @@ function App() {
   const gameEnd = (win) => {
     setEndGame(true)
     if (win) {
-      console.log("WIN !!!")                    // WIN Screen
+      console.log("WIN !!!")                    //TODO:: WIN Screen
     } else {
-      console.log("LOSE !!!")                   // LOSE Screen
+      console.log("LOSE !!!")                   //TODO:: LOSE Screen
     }
   }
 
@@ -38,7 +40,7 @@ function App() {
         }
         setGuess("")
       } else {
-        console.log('Guess not lenght of 5')        // ALERT: word length not valid
+        console.log('Guess not lenght of 5')        // TODO:: alert: word length not valid
       }
     }
   }
