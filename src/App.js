@@ -1,9 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './App.css';
 
 import { guess } from "./logic/guess"
 
-// STATE -> UPDATE STATE W/ USE EFFECT FOR SINGLE LETTER -> USE EFFECT DEPENDENT ON STATE
+function useKeyboard(alphaCallback, enterCallback, deleteCallback) {
+  useEffect(() => {
+    function handle(event) {
+      if (event.keyCode >= 65 && event.keyCode <= 90) {
+        alphaCallback(String.fromCharCode(event.keyCode))
+      } else if (event.keyCode === 13) {
+        enterCallback()
+      } else if (event.keyCode === 8) {
+        deleteCallback()
+      }
+    }
+    document.addEventListener("keydown", handle)
+    return () => document.removeEventListener("keydown", handle)
+  })
+}
 
 function App() {
   let answer = "IDIOT"                          // TEMPORARY ANSWER
@@ -44,6 +58,7 @@ function App() {
       }
     }
   }
+  useKeyboard(insertLetter, submitGuess, deleteLetter)
 
   const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
   return (
