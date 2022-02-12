@@ -66,11 +66,13 @@ function App() {
   const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
   return (
     <div className="App">
-      <h1>Wordle Clone</h1>
-      {alphabet.map(letter => <button key={letter} onClick={() => insertLetter(letter)}>{letter}</button>)}
+      <h1>Wordle</h1>
+      {/* {alphabet.map(letter => <button key={letter} onClick={() => insertLetter(letter)}>{letter}</button>)}
       <button onClick={() => deleteLetter()}>Backspace</button>
-      <button onClick={() => submitGuess()}>Enter</button>
-      <Board currentGuess={currentGuess} prevGuesses={prevGuesses}/>
+      <button onClick={() => submitGuess()}>Enter</button> */}
+      <div className="GameBoard">
+        <Board currentGuess={currentGuess} prevGuesses={prevGuesses}/>
+      </div>
     </div>
   )
 }

@@ -1,7 +1,10 @@
 .board {
-  display: block;
+  display: flex;
+  flex-wrap: wrap;
   width: 420px;
   height: 420px;
   margin-top: 10px;
   margin-bottom: 10px;
+  align-items: center;
+  justify-content: center;
 }
