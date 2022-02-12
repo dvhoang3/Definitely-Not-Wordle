@@ -1,7 +1,11 @@
 .square {
+    display: flex;
     width: 62px;
     height: 62px;
     border: 2px solid gray;
+    margin: 2px;
     background-color: white;
     font-size: xx-large;
+    align-items: center;
+    justify-content: center;
 }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import './App.css';
-import Square from "./components/Square"
+import Row from "./components/Row/Row"
 
 import { guess } from "./logic/guess"
 
@@ -70,7 +70,7 @@ function App() {
       <button onClick={() => submitGuess()}>Enter</button>
       <h2>Guess: {currentGuess}</h2>
       {prevGuesses.map((prevGuess, index) => <h2 key={index}>{`${prevGuess[0]}: ${prevGuess[1]}`}</h2>)}
-      <Square />
+      <Row />
     </div>
   )
 }
