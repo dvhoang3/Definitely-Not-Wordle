@@ -3,7 +3,7 @@ import './Square.css'
 
 const Square = (props) => {
   return (
-    <div className="square"></div>
+    <div className="square">A</div>
   )
 }
 

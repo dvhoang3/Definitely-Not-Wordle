@@ -1,5 +1,7 @@
 .square {
-    width: 100px;
-    height: 100px;
-    background-color: red;
+    width: 62px;
+    height: 62px;
+    border: 2px solid gray;
+    background-color: white;
+    font-size: xx-large;
 }
