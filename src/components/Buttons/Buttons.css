@@ -1,0 +1,45 @@
+.rows {
+  display: flex;
+  width: 500px;
+  height: 58px;
+  margin: 5px 0 5px 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.screenButton {
+  width: 43px;
+  height: 58px;
+  border: none;
+  border-radius: 4px;
+  margin: 0 6px 0 0;
+  background-color: #d3d6da;
+  font-weight: bold;
+}
+.screenButton:focus {
+  outline: none;
+}
+
+.screenButtonDelete {
+  width: 67.5px;
+  height: 58px;
+  border: none;
+  border-radius: 4px;
+  background-color: #d3d6da;
+}
+.screenButtonDelete:focus {
+  outline: none;
+}
+
+.screenButtonEnter {
+  width: 67.5px;
+  height: 58px;
+  border: none;
+  border-radius: 4px;
+  margin: 0 6px 0 0;
+  background-color: #d3d6da;
+  font-weight: bold;
+}
+.screenButtonEnter:focus {
+  outline: none;
+}

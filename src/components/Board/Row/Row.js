@@ -1,7 +1,7 @@
 import React from "react"
 import "./Row.css"
 
-import Square from "../Square/Square"
+import Square from "./Square/Square"
 
 const Row = (props) => {
   let word = (props.word !== undefined ? props.word : "")

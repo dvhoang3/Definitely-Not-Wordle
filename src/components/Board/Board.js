@@ -1,7 +1,7 @@
 import React from "react"
 import "./Board.css"
 
-import Row from "../Row/Row"
+import Row from "./Row/Row"
 
 const Board = (props) => {
   let prevGuesses = props.prevGuesses

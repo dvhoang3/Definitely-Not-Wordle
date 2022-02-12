@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import './App.css';
+
 import Board from "./components/Board/Board"
+import Buttons from "./components/Buttons/Buttons"
 
 import { guess } from "./logic/guess"
 
@@ -63,15 +65,14 @@ function App() {
   }
   useKeyboard(insertLetter, submitGuess, deleteLetter)
 
-  const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
   return (
     <div className="App">
       <h1>Wordle</h1>
-      {/* {alphabet.map(letter => <button key={letter} onClick={() => insertLetter(letter)}>{letter}</button>)}
-      <button onClick={() => deleteLetter()}>Backspace</button>
-      <button onClick={() => submitGuess()}>Enter</button> */}
       <div className="GameBoard">
         <Board currentGuess={currentGuess} prevGuesses={prevGuesses}/>
+      </div>
+      <div className="ScreenKeyboard">
+        <Buttons insertLetterFunction={(letter) => insertLetter(letter)} deleteLetterFunction={() => deleteLetter()} submitGuessFunction={() => submitGuess()}/>
       </div>
     </div>
   )

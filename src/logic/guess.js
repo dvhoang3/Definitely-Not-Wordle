@@ -1,4 +1,6 @@
-export const guess = (word, answer) => {   // String, String -> Array[String]
+import { GREEN, YELLOW, DARKGRAY } from "../colors"
+
+export const guess = (word, answer) => {
   let answer_char_count = {}
   for (let i = 0; i < answer.length; i++) {
     if (answer[i] in answer_char_count) {
@@ -12,22 +14,22 @@ export const guess = (word, answer) => {   // String, String -> Array[String]
   for (let i = 0; i < word.length; i++) {
     if (answer.includes(word[i])) {
       if (word[i] === answer[i]) {
-        res.push('#6aaa64')
+        res.push(GREEN)
         answer_char_count[word[i]] -= 1
       } else {
-        res.push('#c9b458')
+        res.push(YELLOW)
       }
     } else {
-      res.push('#787c7e')
+      res.push(DARKGRAY)
     }
   }
 
   for (let i = 0; i < res.length; i++) {
-    if (res[i] === 'yellow') {
+    if (res[i] === YELLOW) {
       if (answer_char_count[word[i]] > 0) {
         answer_char_count[word[i]] -= 1
       } else {
-        res[i] = '#787c7e'
+        res[i] = DARKGRAY
       }
     }
   }
