@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import './App.css';
-import Row from "./components/Row/Row"
+import Board from "./components/Board/Board"
 
 import { guess } from "./logic/guess"
 
@@ -42,7 +42,9 @@ function App() {
     }
   }
   const deleteLetter = () => {
-    setGuess(currentGuess.slice(0, -1))
+    if (!endGame) {
+      setGuess(currentGuess.slice(0, -1))
+    }
   }
   const submitGuess = () => {
     if (!endGame) {
@@ -64,13 +66,11 @@ function App() {
   const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
   return (
     <div className="App">
-      <h1>Wordle Clone in Progress</h1>
+      <h1>Wordle Clone</h1>
       {alphabet.map(letter => <button key={letter} onClick={() => insertLetter(letter)}>{letter}</button>)}
       <button onClick={() => deleteLetter()}>Backspace</button>
       <button onClick={() => submitGuess()}>Enter</button>
-      <h2>Guess: {currentGuess}</h2>
-      {prevGuesses.map((prevGuess, index) => <h2 key={index}>{`${prevGuess[0]}: ${prevGuess[1]}`}</h2>)}
-      <Row />
+      <Board currentGuess={currentGuess} prevGuesses={prevGuesses}/>
     </div>
   )
 }

@@ -12,13 +12,13 @@ export const guess = (word, answer) => {   // String, String -> Array[String]
   for (let i = 0; i < word.length; i++) {
     if (answer.includes(word[i])) {
       if (word[i] === answer[i]) {
-        res.push('green')
+        res.push('#6aaa64')
         answer_char_count[word[i]] -= 1
       } else {
-        res.push('yellow')
+        res.push('#c9b458')
       }
     } else {
-      res.push('gray')
+      res.push('#787c7e')
     }
   }
 
@@ -27,7 +27,7 @@ export const guess = (word, answer) => {   // String, String -> Array[String]
       if (answer_char_count[word[i]] > 0) {
         answer_char_count[word[i]] -= 1
       } else {
-        res[i] = 'gray'
+        res[i] = '#787c7e'
       }
     }
   }

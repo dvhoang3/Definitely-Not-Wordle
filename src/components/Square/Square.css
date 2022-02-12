@@ -4,8 +4,8 @@
     height: 62px;
     border: 2px solid gray;
     margin: 2px;
-    background-color: white;
     font-size: xx-large;
+    font-weight: bold;
     align-items: center;
     justify-content: center;
 }
