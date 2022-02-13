@@ -9,7 +9,7 @@ import { GREEN, YELLOW, DARKGRAY } from "./colors"
 import Board from "./components/Board/Board"
 import Buttons from "./components/Buttons/Buttons"
 
-import { getRandomWord, isPossibleWord } from "./words/randomWord";
+import { getRandomWord, isPossibleWord } from "./words/wordBank";
 import { guess } from "./logic/guess"
 
 let answer = getRandomWord()
