@@ -9,7 +9,10 @@ import { GREEN, YELLOW, DARKGRAY } from "./colors"
 import Board from "./components/Board/Board"
 import Buttons from "./components/Buttons/Buttons"
 
+import { getRandomWord } from "./words/randomWord";
 import { guess } from "./logic/guess"
+
+let answer = getRandomWord()
 
 function useKeyboard(alphaCallback, enterCallback, deleteCallback) {
   useEffect(() => {
@@ -29,8 +32,6 @@ function useKeyboard(alphaCallback, enterCallback, deleteCallback) {
 
 toast.configure()
 function App() {
-  let answer = "IDIOT"                          // TEMPORARY ANSWER
-
   const [prevGuesses, setPrevGuesses] = useState([])
   const [currentGuess, setGuess] = useState("")
   const [colors, setColors] = useState({})
@@ -117,6 +118,7 @@ function App() {
       setGuess("")
       setEndGame(false)
       setColors({})
+      answer = getRandomWord()
     }
   }
   useKeyboard(insertLetter, submitGuess, deleteLetter)
