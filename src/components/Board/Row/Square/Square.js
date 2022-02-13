@@ -1,10 +1,7 @@
 import React from "react"
 import './Square.css'
 
-const Square = (props) => {
-  const letter = props.letter
-  const color = props.color
-
+const Square = ({ letter, color }) => {
   return (
     <div className="square" style={(color !== undefined) ? {backgroundColor: color, color: "white"} : {backgroundColor: "white"}} >{letter}</div>
   )

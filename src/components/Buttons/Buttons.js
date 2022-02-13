@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
 import "./Buttons.css"
 
 const Buttons = ({ insertLetterFunction, deleteLetterFunction, submitGuessFunction, colors }) => {
@@ -11,7 +11,7 @@ const Buttons = ({ insertLetterFunction, deleteLetterFunction, submitGuessFuncti
   }
 
   return (
-    <div>
+    <div className="keyboard">
       <div className="rows">
         {['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'].map(letter =>
           <button className="screenButton" tabIndex={-1} key={letter}

@@ -3,15 +3,13 @@ import "./Board.css"
 
 import Row from "./Row/Row"
 
-const Board = (props) => {
-  let prevGuesses = props.prevGuesses
-
+const Board = ({ currentGuess, prevGuesses }) => {
   return (
     <div className="board">
       {[0,1,2,3,4,5].map(index => 
         <Row key={index}
         word = {
-          (index === prevGuesses.length) ? props.currentGuess :
+          (index === prevGuesses.length) ? currentGuess :
           ((prevGuesses[index] !== undefined) ? prevGuesses[index][0] : undefined)
         }
         colors = {

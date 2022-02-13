@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import './App.css';
 
+import { toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
+
 import { GREEN, YELLOW, DARKGRAY } from "./colors"
 
 import Board from "./components/Board/Board"
@@ -24,6 +27,7 @@ function useKeyboard(alphaCallback, enterCallback, deleteCallback) {
   })
 }
 
+toast.configure()
 function App() {
   let answer = "IDIOT"                          // TEMPORARY ANSWER
 
@@ -32,12 +36,29 @@ function App() {
   const [colors, setColors] = useState({})
   const [endGame, setEndGame] = useState(false)
 
+  const notify = (message) => {
+    let autoClose = false
+    if (message === 'Guess too Short!!') {
+      autoClose = 2000
+    }
+    toast(message, {
+      toastId: message,
+      position: "top-center",
+      autoClose: autoClose,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      });
+  }
+
   const gameEnd = (win) => {
     setEndGame(true)
     if (win) {
-      console.log("WIN !!!")                    //TODO:: WIN Screen
+      notify('Win!! ... Press Enter to play Again')
     } else {
-      console.log("LOSE !!!")                   //TODO:: LOSE Screen
+      notify(`Lose!! The Answer was ${answer} ... Press Enter to play Again`)
     }
   }
 
@@ -88,9 +109,10 @@ function App() {
         }
         setGuess("")
       } else {
-        console.log('Guess not lenght of 5')        // TODO:: alert: word length not valid
+        notify('Guess too Short!!')
       }
     } else {
+      toast.dismiss()
       setPrevGuesses([])
       setGuess("")
       setEndGame(false)
