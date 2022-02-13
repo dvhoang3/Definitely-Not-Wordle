@@ -9,7 +9,7 @@ import { GREEN, YELLOW, DARKGRAY } from "./colors"
 import Board from "./components/Board/Board"
 import Buttons from "./components/Buttons/Buttons"
 
-import { getRandomWord } from "./words/randomWord";
+import { getRandomWord, isPossibleWord } from "./words/randomWord";
 import { guess } from "./logic/guess"
 
 let answer = getRandomWord()
@@ -39,7 +39,7 @@ function App() {
 
   const notify = (message) => {
     let autoClose = false
-    if (message === 'Guess too Short!!') {
+    if (message === '5 LETTERS... its not that hard...' || message === 'Please Stop Making up Words...') {
       autoClose = 2000
     }
     toast(message, {
@@ -99,7 +99,11 @@ function App() {
   }
   const submitGuess = () => {
     if (!endGame) {
-      if (currentGuess.length === 5) {
+      if (currentGuess.length !== 5) {
+        notify('5 LETTERS... its not that hard...')
+      } else if (!isPossibleWord(currentGuess)) {
+        notify('Please Stop Making up Words...')
+      } else {
         let guessColorResults = guess(currentGuess, answer)
         setPrevGuesses([...prevGuesses, [currentGuess, guessColorResults]])
         updateColors(currentGuess, guessColorResults)
@@ -109,8 +113,6 @@ function App() {
           gameEnd(false)
         }
         setGuess("")
-      } else {
-        notify('Guess too Short!!')
       }
     } else {
       toast.dismiss()
