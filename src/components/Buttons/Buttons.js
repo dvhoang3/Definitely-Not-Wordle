@@ -1,39 +1,7 @@
 import React, { useState, useEffect } from "react"
 import "./Buttons.css"
 
-import { GREEN, YELLOW, DARKGRAY } from "../../colors"
-
-const Buttons = ({ insertLetterFunction, deleteLetterFunction, submitGuessFunction, prevGuesses }) => {
-  const [colors, setColors] = useState({})
-  const updateColors = (guess, guessColors) => {
-    if (prevGuesses === []) {
-      setColors({})
-      return
-    }
-
-    let newColors = {}
-    for (let i=0; i < guess.length; ++i) {
-      if (guessColors[i] === DARKGRAY) {
-        if (colors[guess[i]] === undefined && newColors[guess[i]] === undefined) {
-          newColors[guess[i]] = DARKGRAY
-        }
-      } else if (guessColors[i] === YELLOW) {
-        if (colors[guess[i]] !== GREEN && newColors[guess[i]] !== GREEN) {
-          newColors[guess[i]] = YELLOW
-        }
-      } else {
-        newColors[guess[i]] = GREEN
-      }
-      
-    }
-    setColors({...colors, ...newColors})
-  }
-
-  useEffect(() => {
-    if (prevGuesses.length > 0) {
-      updateColors(prevGuesses[prevGuesses.length - 1][0], prevGuesses[prevGuesses.length - 1][1])
-    }
-  }, [prevGuesses])
+const Buttons = ({ insertLetterFunction, deleteLetterFunction, submitGuessFunction, colors }) => {
 
   const letterButtonStyle = (letter) => {
     return {

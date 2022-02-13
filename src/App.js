@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import './App.css';
 
+import { GREEN, YELLOW, DARKGRAY } from "./colors"
+
 import Board from "./components/Board/Board"
 import Buttons from "./components/Buttons/Buttons"
 
@@ -27,6 +29,7 @@ function App() {
 
   const [prevGuesses, setPrevGuesses] = useState([])
   const [currentGuess, setGuess] = useState("")
+  const [colors, setColors] = useState({})
   const [endGame, setEndGame] = useState(false)
 
   const gameEnd = (win) => {
@@ -36,6 +39,30 @@ function App() {
     } else {
       console.log("LOSE !!!")                   //TODO:: LOSE Screen
     }
+  }
+
+  const updateColors = (guess, guessColors) => {
+    if (prevGuesses === []) {
+      setColors({})
+      return
+    }
+
+    let newColors = {}
+    for (let i=0; i < guess.length; ++i) {
+      if (guessColors[i] === DARKGRAY) {
+        if (colors[guess[i]] === undefined && newColors[guess[i]] === undefined) {
+          newColors[guess[i]] = DARKGRAY
+        }
+      } else if (guessColors[i] === YELLOW) {
+        if (colors[guess[i]] !== GREEN && newColors[guess[i]] !== GREEN) {
+          newColors[guess[i]] = YELLOW
+        }
+      } else {
+        newColors[guess[i]] = GREEN
+      }
+      
+    }
+    setColors({...colors, ...newColors})
   }
 
   const insertLetter = (letter) => {
@@ -51,7 +78,9 @@ function App() {
   const submitGuess = () => {
     if (!endGame) {
       if (currentGuess.length === 5) {
-        setPrevGuesses([...prevGuesses, [currentGuess, guess(currentGuess, answer)]])
+        let guessColorResults = guess(currentGuess, answer)
+        setPrevGuesses([...prevGuesses, [currentGuess, guessColorResults]])
+        updateColors(currentGuess, guessColorResults)
         if (currentGuess === answer) {
           gameEnd(true)
         } else if (prevGuesses.length + 1 === 6) {
@@ -65,7 +94,7 @@ function App() {
       setPrevGuesses([])
       setGuess("")
       setEndGame(false)
-      // KEYBOARD COLORS NOT RESETTING !!
+      setColors({})
     }
   }
   useKeyboard(insertLetter, submitGuess, deleteLetter)
@@ -77,7 +106,7 @@ function App() {
         <Board currentGuess={currentGuess} prevGuesses={prevGuesses}/>
       </div>
       <div className="ScreenKeyboard">
-        <Buttons insertLetterFunction={(letter) => insertLetter(letter)} deleteLetterFunction={() => deleteLetter()} submitGuessFunction={() => submitGuess()} prevGuesses={prevGuesses}/>
+        <Buttons insertLetterFunction={(letter) => insertLetter(letter)} deleteLetterFunction={() => deleteLetter()} submitGuessFunction={() => submitGuess()} colors={colors}/>
       </div>
     </div>
   )
