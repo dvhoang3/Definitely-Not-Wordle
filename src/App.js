@@ -61,6 +61,11 @@ function App() {
       } else {
         console.log('Guess not lenght of 5')        // TODO:: alert: word length not valid
       }
+    } else {
+      setPrevGuesses([])
+      setGuess("")
+      setEndGame(false)
+      // KEYBOARD COLORS NOT RESETTING !!
     }
   }
   useKeyboard(insertLetter, submitGuess, deleteLetter)
@@ -72,7 +77,7 @@ function App() {
         <Board currentGuess={currentGuess} prevGuesses={prevGuesses}/>
       </div>
       <div className="ScreenKeyboard">
-        <Buttons insertLetterFunction={(letter) => insertLetter(letter)} deleteLetterFunction={() => deleteLetter()} submitGuessFunction={() => submitGuess()}/>
+        <Buttons insertLetterFunction={(letter) => insertLetter(letter)} deleteLetterFunction={() => deleteLetter()} submitGuessFunction={() => submitGuess()} prevGuesses={prevGuesses}/>
       </div>
     </div>
   )
