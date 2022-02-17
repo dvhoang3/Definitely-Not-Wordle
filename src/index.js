@@ -1,13 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import ClassicPage from './Pages/ClassicPage/ClassicPage';
+import ClassicRacePage from './Pages/ClassicRacePage/ClassicRacePage'
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <BrowserRouter>
+    <Routes>
+      <Route path= "/" element={<ClassicPage />}/>
+      <Route path= "/ClassicPage" element={<ClassicPage />}/>
+      <Route path= "ClassicRacePage" element={<ClassicRacePage />}/>
+    </Routes>
+  </BrowserRouter>,
   document.getElementById('root')
 );
 

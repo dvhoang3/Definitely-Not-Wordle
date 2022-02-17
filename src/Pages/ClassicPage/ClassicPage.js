@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
-import './App.css';
+import React, { useState, useEffect } from "react"
+import './ClassicPage.css'
 
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 
-import { GREEN, YELLOW, DARKGRAY } from "./colors"
+import { GREEN, YELLOW, DARKGRAY } from "../../colors"
 
-import Board from "./components/Board/Board"
-import Buttons from "./components/Buttons/Buttons"
+import Board from "../../components/Board/Board"
+import Buttons from "../../components/Buttons/Buttons"
 
-import { getRandomWord, isPossibleWord } from "./words/wordBank";
-import { guess } from "./logic/guess"
+import { getRandomWord, isPossibleWord } from "../../words/wordBank"
+import { guess } from "../../logic/guess"
 
 let answer = getRandomWord()
 
@@ -31,35 +31,45 @@ function useKeyboard(alphaCallback, enterCallback, deleteCallback) {
 }
 
 toast.configure()
-function App() {
+function ClassicPage() {
   const [prevGuesses, setPrevGuesses] = useState([])
   const [currentGuess, setGuess] = useState("")
   const [colors, setColors] = useState({})
   const [endGame, setEndGame] = useState(false)
 
-  const notify = (message) => {
-    let autoClose = false
-    if (message === '5 LETTERS... its not that hard...' || message === 'Please Stop Making up Words...') {
-      autoClose = 2000
-    }
-    toast(message, {
+  const notifyInputError = (message) => {
+    toast.error(message, {
       toastId: message,
       position: "top-center",
-      autoClose: autoClose,
+      autoClose: 2000,
       hideProgressBar: true,
       closeOnClick: true,
       pauseOnHover: false,
       draggable: false,
       progress: undefined,
+      theme: "colored"
       });
+  }
+  const notifyEndGame = (message) => {
+    toast.success(message, {
+      toastId: message,
+      position: "top-center",
+      autoClose: false,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: "colored"
+    })
   }
 
   const gameEnd = (win) => {
     setEndGame(true)
     if (win) {
-      notify('Win!! ... Press Enter to play Again')
+      notifyEndGame('Win!! ... Press Enter to play Again')
     } else {
-      notify(`Lose!! The Answer was ${answer} ... Press Enter to play Again`)
+      notifyEndGame(`Lose!! The Answer was ${answer} ... Press Enter to play Again`)
     }
   }
 
@@ -100,9 +110,11 @@ function App() {
   const submitGuess = () => {
     if (!endGame) {
       if (currentGuess.length !== 5) {
-        notify('5 LETTERS... its not that hard...')
+        // Shake Row -> update some state -> dont care if its true or false
+        notifyInputError('5 LETTERS... its not that hard...')
+        // Shake Row -> update some state -> dont care if its true or false
       } else if (!isPossibleWord(currentGuess)) {
-        notify('Please Stop Making up Words...')
+        notifyInputError('Please Stop Making up Words...')
       } else {
         let guessColorResults = guess(currentGuess, answer)
         setPrevGuesses([...prevGuesses, [currentGuess, guessColorResults]])
@@ -126,8 +138,8 @@ function App() {
   useKeyboard(insertLetter, submitGuess, deleteLetter)
 
   return (
-    <div className="App">
-      <h1>Wordle</h1>
+    <div className="Classic">
+      <h1>Not Wordle</h1>
       <div className="GameBoard">
         <Board currentGuess={currentGuess} prevGuesses={prevGuesses}/>
       </div>
@@ -138,4 +150,4 @@ function App() {
   )
 }
 
-export default App;
+export default ClassicPage;
